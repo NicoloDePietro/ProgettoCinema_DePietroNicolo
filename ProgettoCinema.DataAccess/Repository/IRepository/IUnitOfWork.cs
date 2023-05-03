@@ -1,5 +1,4 @@
-﻿using ProgettoCinema.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProgettoCinema.DataAccess.Repository.IRepository
 {
-    public interface IUserRepository : IRepository<Utente>
+    public interface IUnitOfWork
     {
-        void Update(Utente category);
+        IUserRepository Utente { get; }
+        void Save();
+
     }
 }

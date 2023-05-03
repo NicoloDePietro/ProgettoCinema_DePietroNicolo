@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ProgettoCinema.DataAccess;
 using ProgettoCinema.DataAccess.Data;
+using ProgettoCinema.DataAccess.Repository;
+using ProgettoCinema.DataAccess.Repository.IRepository;
 
 namespace ProgettoCinema
 {
@@ -15,6 +17,7 @@ namespace ProgettoCinema
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
             builder.Configuration.GetConnectionString("DefaultConnection")
              ));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 

@@ -8,16 +8,16 @@ namespace ProgettoCinema.Controllers
 {
     public class UtenteController : Controller
     {
-        private readonly IUserRepository _db;
-        public UtenteController(IUserRepository db)
+        private readonly IUnitOfWork _unitOfWork;
+        public UtenteController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
 
         //GET
         public IActionResult Index()
         {
-            IEnumerable<Utente> objCategoryList = _db.GetAll();
+            IEnumerable<Utente> objCategoryList = _unitOfWork.Utente.GetAll();
             return View(objCategoryList);
         }
 
@@ -37,8 +37,8 @@ namespace ProgettoCinema.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Add(obj);
-                _db.Save();
+                _unitOfWork.Utente.Add(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Utente created successfully";
                 return RedirectToAction(nameof(Index));
             }
@@ -53,7 +53,7 @@ namespace ProgettoCinema.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDbFirst = _db.GetFirstOrDefault(u => u.IdUtente == id);
+            var categoryFromDbFirst = _unitOfWork.Utente.GetFirstOrDefault(u => u.IdUtente == id);
             if (categoryFromDbFirst == null)
             {
                 return NotFound();
@@ -71,30 +71,13 @@ namespace ProgettoCinema.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Update(obj);
-                _db.Save();
+                _unitOfWork.Utente.Update(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Utente updated successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View(obj);
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken] 
-        //public IActionResult Edit(Categoria obj) 
-        //{ 
-        //    if (obj.Nome == obj.DisplayOrder.ToString()) 
-        //    { 
-        //        ModelState.AddModelError(nameof(obj.Nome), $"The name of property {nameof(obj.DisplayOrder)} cannot exactly match the name of property {nameof(obj.Nome)}"); 
-        //    } 
-        //    if (ModelState.IsValid) 
-        //    { 
-        //        _unitOfWork.Categoria.Update(obj); 
-        //        _unitOfWork.Save(); 
-        //        TempData["success"] = "Category edited successfully"; 
-        //        return RedirectToAction(nameof(Index)); 
-        //    } 
-        //    return View(obj); 
-        //}
 
 
         //GET
@@ -104,7 +87,7 @@ namespace ProgettoCinema.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDbFirst = _db.GetFirstOrDefault(u => u.IdUtente == id);
+            var categoryFromDbFirst = _unitOfWork.Utente.GetFirstOrDefault(u => u.IdUtente == id);
             if (categoryFromDbFirst == null)
             {
                 return NotFound();
@@ -120,13 +103,13 @@ namespace ProgettoCinema.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDbFirst = _db.GetFirstOrDefault(u => u.IdUtente == id);
+            var categoryFromDbFirst = _unitOfWork.Utente.GetFirstOrDefault(u => u.IdUtente == id);
             if (categoryFromDbFirst == null)
             {
                 return NotFound();
             }
-            _db.Remove(categoryFromDbFirst);
-            _db.Save();
+            _unitOfWork.Utente.Remove(categoryFromDbFirst);
+            _unitOfWork.Save();
             TempData["success"] = "Utente deleted successfully";
             return RedirectToAction(nameof(Index));
         }

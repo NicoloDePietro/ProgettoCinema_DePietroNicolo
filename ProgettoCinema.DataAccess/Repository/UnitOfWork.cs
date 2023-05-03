@@ -1,6 +1,5 @@
 ﻿using ProgettoCinema.DataAccess.Data;
 using ProgettoCinema.DataAccess.Repository.IRepository;
-using ProgettoCinema.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +8,19 @@ using System.Threading.Tasks;
 
 namespace ProgettoCinema.DataAccess.Repository
 {
-    public class UserRepository : Repository<Utente>, IUserRepository
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _db;
-        public UserRepository(ApplicationDbContext db) : base(db)
+        public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            Utente = new UserRepository(_db);
         }
-        public void Update(Utente category)
+        public IUserRepository Utente { get; private set; } = null!;
+        public void Save()
         {
-            _db.Utenti.Update(category);
+            _db.SaveChanges();
         }
     }
+
 }

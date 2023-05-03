@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProgettoCinema.DataAccess;
 using ProgettoCinema.DataAccess.Data;
+using ProgettoCinema.DataAccess.Repository.IRepository;
 using ProgettoCinema.Models;
 
 namespace ProgettoCinema.Controllers
 {
     public class UtenteController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public UtenteController(ApplicationDbContext db)
+        private readonly IUserRepository _db;
+        public UtenteController(IUserRepository db)
         {
             _db = db;
         }
@@ -16,7 +17,7 @@ namespace ProgettoCinema.Controllers
         //GET
         public IActionResult Index()
         {
-            IEnumerable<Utente> objCategoryList = _db.Utenti;
+            IEnumerable<Utente> objCategoryList = _db.GetAll();
             return View(objCategoryList);
         }
 
@@ -36,8 +37,9 @@ namespace ProgettoCinema.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Utenti.Add(obj);
-                _db.SaveChanges();
+                _db.Add(obj);
+                _db.Save();
+                TempData["success"] = "Utente created successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View(obj);
@@ -51,7 +53,7 @@ namespace ProgettoCinema.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDbFirst = _db.Utenti.FirstOrDefault(u => u.IdUtente == id);
+            var categoryFromDbFirst = _db.GetFirstOrDefault(u => u.IdUtente == id);
             if (categoryFromDbFirst == null)
             {
                 return NotFound();
@@ -69,8 +71,9 @@ namespace ProgettoCinema.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Utenti.Update(obj);
-                _db.SaveChanges();
+                _db.Update(obj);
+                _db.Save();
+                TempData["success"] = "Utente updated successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View(obj);
@@ -101,14 +104,14 @@ namespace ProgettoCinema.Controllers
             {
                 return NotFound();
             }
-            //var categoryFromDb = _db.Categories.Find(id);
-            var categoryFromDbFirst = _db.Utenti.FirstOrDefault(u => u.IdUtente == id);
+            var categoryFromDbFirst = _db.GetFirstOrDefault(u => u.IdUtente == id);
             if (categoryFromDbFirst == null)
             {
                 return NotFound();
             }
             return View(categoryFromDbFirst);
         }
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int id, [Bind("IdUtente")] Utente category)
@@ -117,14 +120,13 @@ namespace ProgettoCinema.Controllers
             {
                 return NotFound();
             }
-            //var obj = _db.Categories.Find(id);
-            var categoryFromDbFirst = _db.Utenti.FirstOrDefault(u => u.IdUtente == id);
+            var categoryFromDbFirst = _db.GetFirstOrDefault(u => u.IdUtente == id);
             if (categoryFromDbFirst == null)
             {
                 return NotFound();
             }
-            _db.Utenti.Remove(categoryFromDbFirst);
-            _db.SaveChanges();
+            _db.Remove(categoryFromDbFirst);
+            _db.Save();
             TempData["success"] = "Utente deleted successfully";
             return RedirectToAction(nameof(Index));
         }

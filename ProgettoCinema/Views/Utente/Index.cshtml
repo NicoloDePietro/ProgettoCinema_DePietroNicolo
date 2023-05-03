@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Utente>
+﻿@using ProgettoCinema.Models
+@model IEnumerable<Utente>
 @{
     ViewData["Title"] = "Index";
 }
@@ -25,6 +26,24 @@
                 <th>
                     Cognome
                 </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Password
+                </th>
+                <th>
+                    Genere
+                </th>
+                <th>
+                    Data di nascita
+                </th>
+                <th>
+                    Comune di residenza
+                </th>
+                <th>
+
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +55,31 @@
                     </td>
                     <td with="30%">
                         @obj.Cognome
+                    </td>
+                    <td width="50%">
+                        @obj.Email
+                    </td>
+                    <td with="30%">
+                        @obj.Password
+                    </td>
+                    <td width="50%">
+                        @obj.Genere
+                    </td>
+                    <td with="30%">
+                        @obj.DataNascita
+                    </td>
+                    <td with="30%">
+                        @obj.ComuneResidenza
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Utente" asp-action="Edit" asp-route-id="@obj.IdUtente" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i>Edit
+                            </a>
+                            <a asp-controller="Utente" asp-action="Delete" asp-route-id="@obj.IdUtente" class="btn btn-danger mx-2">
+                                <i class="bi bi-trash-fill"></i>Delete
+                            </a>
+                        </div>
                     </td>
                 </tr>
             }

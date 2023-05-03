@@ -1,7 +1,7 @@
 ﻿using ProgettoCinema.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProgettoCinema.Data;
+namespace ProgettoCinema.DataAccess.Data;
 public class ApplicationDbContext : DbContext
 {
 

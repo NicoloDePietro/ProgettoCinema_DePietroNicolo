@@ -3,29 +3,42 @@
     ViewData["Title"] = "Index";
 }
 
-<table class="table table-bordered table-striped" style="width:100%">
-    <thead>
-        <tr>
-            <th>
-                Category Name
-            </th>
-            <th>
-                Display Order
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var obj in Model)
-        {
-            <tr>
-                <td width="50%">
-                    @obj.Nome
-                </td>
-                <td with="30%">
-                    @obj.Cognome
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Utente List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Utente" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Utente
+            </a>
+        </div>
+    </div>
+    <br /><br />
 
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Nome Utente
+                </th>
+                <th>
+                    Cognome
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="50%">
+                        @obj.Nome
+                    </td>
+                    <td with="30%">
+                        @obj.Cognome
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

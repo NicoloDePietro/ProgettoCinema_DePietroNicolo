@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using ProgettoCinema.Data;
+using ProgettoCinema.DataAccess;
+using ProgettoCinema.DataAccess.Data;
 
 namespace ProgettoCinema
 {

@@ -1,0 +1,60 @@
+﻿@model Utente
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" asp-action="Create">
+    <div class="border p-3 mt-4">
+        <div class="row ">
+            <h2 class="text-primary">Create Utente</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="row mb-3">
+            <label asp-for="Nome"></label>
+            <input asp-for="Nome" class="form-cotrol" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div class=" row mb-3">
+            <label asp-for="Cognome"></label>
+            <input asp-for="Cognome" class="form-cotrol" />
+            <span asp-validation-for="Cognome" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-cotrol" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-cotrol" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Genere"></label>
+            <input asp-for="Genere" class="form-cotrol" />
+            <span asp-validation-for="Genere" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="DataNascita"></label>
+            <input asp-for="DataNascita" class="form-cotrol" />
+            <span asp-validation-for="DataNascita" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="ComuneResidenza"></label>
+            <input asp-for="ComuneResidenza" class="form-cotrol" />
+            <span asp-validation-for="ComuneResidenza" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="Utente" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+    </div>
+</form>
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

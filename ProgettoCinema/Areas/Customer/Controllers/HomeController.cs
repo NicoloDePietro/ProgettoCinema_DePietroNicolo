@@ -2,7 +2,7 @@
 using ProgettoCinema.Models;
 using System.Diagnostics;
 
-namespace ProgettoCinema.Controllers
+namespace ProgettoCinema.Areas.Customer.Controllers
 {
     public class HomeController : Controller
     {

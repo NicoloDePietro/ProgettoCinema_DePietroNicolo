@@ -4,8 +4,9 @@ using ProgettoCinema.DataAccess.Data;
 using ProgettoCinema.DataAccess.Repository.IRepository;
 using ProgettoCinema.Models;
 
-namespace ProgettoCinema.Controllers
+namespace ProgettoCinema.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class UtenteController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

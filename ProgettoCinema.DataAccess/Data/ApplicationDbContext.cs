@@ -14,9 +14,9 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 
     public DbSet<Utente> Utenti { get; set; } = null!;
     //public DbSet<Film> Films { get; set; } = null!;   //DA VEDERE L'ORDINE IN CUI METTERLI
-    //public DbSet<Posto> Posti { get; set; } = null!;
-    //public DbSet<Sala> Sale { get; set; } = null!;
     //public DbSet<Spettacolo> Spettacoli { get; set; } = null!;
+    //public DbSet<Sala> Sale { get; set; } = null!;
+    //public DbSet<Posto> Posti { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

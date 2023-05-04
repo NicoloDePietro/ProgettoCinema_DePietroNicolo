@@ -22,9 +22,9 @@ namespace ProgettoCinema.Models
 
         public string ComuneResidenza { get; set; } = null!;
 
-        //public virtual ICollection<Posto> Posti { get; set; } = new List<Posto>();
+        //public ICollection<Posto> Posti { get; set; } = new List<Posto>();
 
-        //public virtual ICollection<Spettacolo> Spettacoli { get; set; } = new List<Spettacolo>();
+        //public ICollection<Spettacolo> Spettacoli { get; set; } = new List<Spettacolo>();
     }
 
 }

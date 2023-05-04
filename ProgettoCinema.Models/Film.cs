@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,9 @@ namespace ProgettoCinema.Models
 {
     public partial class Film
     {
+        [Key]
+        public int IdFilm { get; set; }
+        [Required]
         public string Titolo { get; set; } = null!;
 
         public string Genere { get; set; } = null!;
@@ -20,6 +25,6 @@ namespace ProgettoCinema.Models
 
         public string Locandina { get; set; } = null!;
 
-        //public virtual ICollection<Spettacolo> Spettacoli { get; set; } = new List<Spettacolo>();
+        //public ICollection<Spettacolo> Spettacoli { get; set; } = new List<Spettacolo>();
     }
 }

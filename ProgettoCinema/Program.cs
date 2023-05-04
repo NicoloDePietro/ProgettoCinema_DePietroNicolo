@@ -3,6 +3,7 @@ using ProgettoCinema.DataAccess;
 using ProgettoCinema.DataAccess.Data;
 using ProgettoCinema.DataAccess.Repository;
 using ProgettoCinema.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Identity;
 
 namespace ProgettoCinema
 {
@@ -14,10 +15,25 @@ namespace ProgettoCinema
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
+
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-            builder.Configuration.GetConnectionString("DefaultConnection")
+             builder.Configuration.GetConnectionString("DefaultConnection")
              ));
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
 
             var app = builder.Build();
 
@@ -35,6 +51,7 @@ namespace ProgettoCinema
             app.UseRouting();
 
             app.UseAuthorization();
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",
